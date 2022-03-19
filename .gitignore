@@ -1,0 +1,6 @@
+/target
+/Cargo.lock
+/ss.db-shm
+/ss.db-wal
+/debug.log
+/.vscode
