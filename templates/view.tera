@@ -1,0 +1,6 @@
+{% extends "layout.tera" %}
+{% block title %}Data View{% endblock title %}
+{% block head %}
+    {{ super() }}
+    
+{% endblock head %}
