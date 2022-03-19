@@ -26,7 +26,7 @@ async fn index(
 
     let image = Image::find_by_id(1).one(conn).await?.with_context(|| "Could not find image!")?;
 
-    let html = template.render("dbtest_index.html", &tera::Context::from_serialize(ImagePage { img_data: image.b64 })?)?;
+    let html = template.render("dbtest_index.tera", &tera::Context::from_serialize(ImagePage { img_data: image.b64 })?)?;
 
     Ok(HttpResponse::Ok().content_type("text/html").body(html))
 }
