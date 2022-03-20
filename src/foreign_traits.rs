@@ -8,7 +8,8 @@ use std::fmt::Display;
 pub enum ErrToActix {
     Anyhow(anyhow::Error),
     SeaORM(sea_orm::DbErr),
-    Tera(tera::Error)
+    Tera(tera::Error),
+    SerdeJSON(serde_json::error::Error)
 }
 
 impl Display for ErrToActix {
@@ -16,7 +17,8 @@ impl Display for ErrToActix {
         match self {
             Self::Anyhow(e) => write!(f, "{}", e),
             Self::SeaORM(e) => write!(f, "{}", e),
-            Self::Tera(e) => write!(f, "{}", e)
+            Self::Tera(e) => write!(f, "{}", e),
+            Self::SerdeJSON(e) => write!(f, "{}", e)
         }
     }
 }
@@ -44,5 +46,11 @@ impl From<sea_orm::DbErr> for ErrToActix {
 impl From<tera::Error> for ErrToActix {
     fn from(rhs: tera::Error) -> Self {
         Self::Tera(rhs)
+    }
+}
+
+impl From<serde_json::Error> for ErrToActix {
+    fn from(rhs: serde_json::Error) -> Self {
+        Self::SerdeJSON(rhs)
     }
 }

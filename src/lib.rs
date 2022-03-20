@@ -27,11 +27,15 @@ pub async fn main() -> std::io::Result<()> {
 
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
 
+    let secret_key = actix_web::cookie::Key::generate();
+
     let server = HttpServer::new(move || {
         App::new()
             .app_data(Data::new(state.clone()))
             .wrap(actix_web::middleware::Logger::default())
-            // .service(Files::new("/static", "static/").redirect_to_slash_directory()) // enable logger
+            .wrap(actix_session::SessionMiddleware::new(
+                actix_session::storage::CookieSessionStore::default(), secret_key.clone()
+            ))
             .configure(|conf| {
                 conf.service(crate::paths::index);
             })
