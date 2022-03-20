@@ -1,0 +1,10 @@
+{% extends "layout.tera" %}
+
+{% block body %}
+<div class="container-lg" >
+    <form>
+        {% block questions %}
+        {% endblock questions %}
+    </form>
+</div>
+{% endblock body %}

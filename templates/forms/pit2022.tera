@@ -1,0 +1,21 @@
+{% extends "forms/form.tera" %}
+{% block title %}Pit Scouting Form{% endblock title %}
+{% block questions %}
+    <div class="mb-3">
+        <label for="team_number" class="form-label">Team Number</label>
+        <input type="number" class="form-control" id="team_number" placeholder="5411">
+    </div>
+    <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">Another label</label>
+        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+    </div>
+
+    <input type="radio" id="tank" name="drivetrain" value="tank" checked>
+    <label for="tank">Tank</label>
+    <input type="radio" id="meccanum" name="drivetrain" value="meccanum" checked>
+    <label for="meccanum">Meccanum</label>
+    <input type="radio" id="Swerve" name="drivetrain" value="Swerve" checked>
+    <label for="Swerve">Swerve</label>
+    <input type="radio" id="Kiwi" name="drivetrain" value="Kiwi" checked>
+    <label for="Kiwi">Kiwi</label>
+{% endblock questions %}
