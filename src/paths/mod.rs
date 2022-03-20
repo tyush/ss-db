@@ -1,14 +1,18 @@
 use actix_web::{
     get, web, HttpRequest, HttpResponse
 };
+use actix_session::Session;
 use anyhow::Context;
 use sea_orm::prelude::*;
 use crate::foreign_traits::*;
 
-type WebResult = Result<HttpResponse, ErrToActix>;
+pub(crate) type WebResult = Result<HttpResponse, ErrToActix>;
 use entities::images::Entity as Image;
 
 use crate::app::AppState;
+
+
+pub mod forms2022;
 
 
 #[derive(serde::Serialize)]
