@@ -36,9 +36,7 @@ pub async fn main() -> std::io::Result<()> {
             .wrap(actix_session::SessionMiddleware::new(
                 actix_session::storage::CookieSessionStore::default(), secret_key.clone()
             ))
-            .configure(|conf| {
-                conf.service(crate::paths::index);
-            })
+            .configure(paths::add_paths)
             .service(Files::new("/static", "./static")) // needs actix_files
     });
 
