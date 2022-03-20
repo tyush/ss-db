@@ -1,5 +1,5 @@
 use actix_web::{
-    get, web, HttpRequest, HttpResponse
+    get, web::{self, ServiceConfig}, HttpRequest, HttpResponse
 };
 use actix_session::Session;
 use anyhow::Context;
@@ -33,4 +33,12 @@ async fn index(
     let html = template.render("dbtest_index.tera", &tera::Context::from_serialize(ImagePage { img_data: image.b64 })?)?;
 
     Ok(HttpResponse::Ok().content_type("text/html").body(html))
+}
+
+pub fn add_paths(
+    conf: &mut ServiceConfig
+) {
+    conf.service(index)
+        .service(forms2022::pit);
+        
 }

@@ -22,14 +22,5 @@ async fn pit(
 ) -> WebResult {
     let template = &data.templates;
     
-    if let Some((username, pass_hash)) = session.get::<(String, String)>("login")? {
-        let data = TemplatePit2022 {
-            username,
-            pass_hash
-        };
-
-        Ok(HttpResponse::Ok().content_type("text/html").body(template.render("forms/pit2022.tera", &tera::Context::from_serialize(data)?)?))
-    } else {
-        Ok(HttpResponse::Found().append_header(("Location", "/login")).finish())
-    }
+    Ok(HttpResponse::Ok().content_type("text/html").body(template.render("forms/pit2022.tera", &tera::Context::new())?))
 }

@@ -1,6 +1,4 @@
-<head>
-    <title>Hello from Actix!</title>
-</head>
-<body>
-    <img src="{{ img_data }}" />
-</body>
+{% extends "layout.tera" %}
+{% block body %}
+<img src="{{ img_data }}" />
+{% endblock body %}
