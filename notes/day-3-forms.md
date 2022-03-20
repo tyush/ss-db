@@ -8,12 +8,12 @@ HTML form inputs have a funny little variant called `hidden`. Using this variant
 
 ![](./day-3-hidden-1.png)
 
-By combining this with the Server-Side Rendering we explored in the last post, we can set an arbitrary value that will be passed along with the form.
+By combining this with the Server-Side Rendering we explored in the [last post](./day-2-template.md), we can set an arbitrary value that will be passed along with the form.
 
 ```django
-<input type="text" placeholder="Name" value="{{ name }}" />
-<input type="hidden" value="{{ uuid }}" />
-<input type="hidden" value="{{ token }}" />
-<input type="text" placeholder="Event" />
+<input type="text" name="name" placeholder="Name" value="{{ name }}" />
+<input type="hidden" name="uuid" value="{{ uuid }}" />
+<input type="hidden" name="token" value="{{ token }}" />
+<input type="text" name="event" placeholder="Event" />
 ```
 
