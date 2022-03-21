@@ -1,8 +1,8 @@
 {% extends "layout.tera" %}
 
 {% block body %}
-<div class="container-lg" >
-    <form>
+<div class="container-md" >
+    <form action="{% block action %}{% endblock action %}" method="post">
         {% block questions %}
         {% endblock questions %}
     </form>

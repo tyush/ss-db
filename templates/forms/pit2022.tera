@@ -1,21 +1,131 @@
 {% extends "forms/form.tera" %}
+{% import "forms/form_macros.tera" as macros %}
 {% block title %}Pit Scouting Form{% endblock title %}
+{% block action %}/form/2022/pit/submit{% endblock action %}
 {% block questions %}
-    <div class="mb-3">
-        <label for="team_number" class="form-label">Team Number</label>
-        <input type="number" class="form-control" id="team_number" placeholder="5411">
-    </div>
-    <div class="mb-3">
-        <label for="formGroupExampleInput2" class="form-label">Another label</label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
-    </div>
+{{ macros::q(id="team_number", label="Team Number", placeholder="5411") }}
+{{ macros::q(id="team_name", label="Team Name", placeholder="Robotalons") }}
 
-    <input type="radio" id="tank" name="drivetrain" value="tank" checked>
-    <label for="tank">Tank</label>
-    <input type="radio" id="meccanum" name="drivetrain" value="meccanum" checked>
-    <label for="meccanum">Meccanum</label>
-    <input type="radio" id="Swerve" name="drivetrain" value="Swerve" checked>
-    <label for="Swerve">Swerve</label>
-    <input type="radio" id="Kiwi" name="drivetrain" value="Kiwi" checked>
-    <label for="Kiwi">Kiwi</label>
+<div class="row justify-content-center">
+    <div class="col">
+        Drivetrain
+    </div>
+    <div class="col">
+        <input type="radio" id="tank" name="drivetrain" value="Tank" checked>
+        <label for="tank">Tank</label>
+        <input type="radio" id="meccanum" name="drivetrain" value="Meccanum">
+        <label for="meccanum">Meccanum</label>
+        <input type="radio" id="swerve" name="drivetrain" value="Swerve">
+        <label for="swerve">Swerve/Kiwi</label>
+        <input type="radio" id="other" name="drivetrain" value="Other">
+        <label for="other">Other</label>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        Dimensions
+    </div>
+    <div class="col">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">x</span>
+            </div>
+            <input type="number" class="form-control" required name="size_x" id="size_x" placeholder="in." aria-placeholder="inches">
+            <div class="input-group-prepend">
+                <span class="input-group-text">y</span>
+            </div>
+            <input type="number" class="form-control" required name="size_y" id="size_y">
+            <div class="input-group-prepend">
+                <span class="input-group-text">z</span>
+            </div>
+            <input type="number" class="form-control" required name="size_z" id="size_z">
+          </div>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        Bar
+    </div>
+    <div class="col">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">reaches</span>
+            </div>
+            <select class="form-control" name="bar">
+                <option selected value="none">None</option>
+                <option value="low">Low</option>
+                <option value="middle">Middle</option>
+                <option value="high">High</option>
+                <option value="traversal">Traversal</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        Can shoot: auton?
+    </div>
+    <div class="col justify-content-center">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="auton_shoot_upper" value="true">
+            <label class="form-check-label" name="auton_shoot_upper" for="auton_shoot_upper">upper</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="auton_shoot_lower" value="true">
+            <label class="form-check-label" name="auton_shoot_lower" for="auton_shoot_lower">lower</label>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        Can shoot: teleop?
+    </div>
+    <div class="col justify-content-center">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="teleop_shoot_upper" value="true">
+            <label class="form-check-label" name="teleop_shoot_upper" for="teleop_shoot_upper">upper</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="teleop_shoot_lower" value="true">
+            <label class="form-check-label" name="teleop_shoot_lower" for="teleop_shoot_lower">lower</label>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        Image
+    </div>
+    <div class="col justify-content-center">
+        <div class="form-group">
+            <input type="file" accept="image/*" name="img" required capture="environment" class="form-control-file" id="image">
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="comments" class="form-label">Comments</label>
+    </div>
+    <div class="col">
+        <input type="text" name="comments" class="form-control" id="comments" autocomplete="off" placeholder="{{ random_comment }}">
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row">
+    <input type="submit" class="form-control btn btn-lg btn-primary" />
+</div>
+
+
 {% endblock questions %}

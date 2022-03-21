@@ -21,7 +21,6 @@ pub struct Model {
     pub auto_shots: i32,
     pub auto_taxi: i32,
     pub teleop_where_shoot: i32,
-    pub teleop_shots: i32,
     pub image: Option<i32>,
 }
 

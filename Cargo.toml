@@ -19,7 +19,10 @@ env_logger = "0.9.0"
 log = "0.4"
 actix-files = "0.6"
 actix-session = { version = "0.6", features = [ "cookie-session" ] }
-serde_json = "*"
+serde_json = "1.0"
+rand = "0.8"
+lazy_static = "1.4"
+actix-web-flash-messages = { version = "0.3", features = [ "cookies" ] }
 
 migration = { path = "migration" }
 entities = { path = "entities" }

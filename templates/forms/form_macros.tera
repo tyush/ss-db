@@ -1,0 +1,23 @@
+{% macro q(id, label, placeholder="", type="text") %}
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="{{ id }}" class="form-label">{{ label }}</label>
+    </div>
+    <div class="col">
+        <input type="text" name="{{ id }}" class="form-control" id="{{ id }}" autocomplete="off" required placeholder="{{ placeholder }}">
+    </div>
+</div>
+<div class="my-3" />
+{% endmacro q %}
+
+{% macro cq(left, right) %}
+<div class="row justify-content-center">
+    <div class="col">
+        {{ left }}
+    </div>
+    <div class="col">
+        {{ right }}
+    </div>
+</div>
+<div class="my-3" />
+{% endmacro cq %}
