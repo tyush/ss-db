@@ -1,3 +1,5 @@
+use actix_web_flash_messages::Level;
+
 #[cfg(test)]
 mod tests {
     #[test]
@@ -6,6 +8,7 @@ mod tests {
         assert_eq!(result, 4);
     }
 }
+
 
 pub async fn main() -> std::io::Result<()> {
     // use migration::Migrator;
@@ -25,7 +28,7 @@ pub async fn main() -> std::io::Result<()> {
     let templates = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*")).unwrap();
     let state = AppState { templates, conn };
 
-    env_logger::init_from_env(env_logger::Env::new().default_filter_or("info"));
+    env_logger::init_from_env(env_logger::Env::new().default_filter_or("debug"));
 
     let secret_key = actix_web::cookie::Key::generate();
 
@@ -33,6 +36,9 @@ pub async fn main() -> std::io::Result<()> {
         App::new()
             .app_data(Data::new(state.clone()))
             .wrap(actix_web::middleware::Logger::default())
+            .wrap(actix_web_flash_messages::FlashMessagesFramework::builder(
+                actix_web_flash_messages::storage::CookieMessageStore::builder(secret_key.clone()).build()
+            ).minimum_level(Level::Debug).build())
             .wrap(actix_session::SessionMiddleware::new(
                 actix_session::storage::CookieSessionStore::default(), secret_key.clone()
             ))
@@ -51,4 +57,6 @@ pub async fn main() -> std::io::Result<()> {
 
 pub mod foreign_traits;
 pub(crate) mod paths;
-pub(crate) mod app;pub(crate) mod app;
+pub(crate) mod app;
+pub(crate) mod tera_util;
+pub(crate) mod game;
