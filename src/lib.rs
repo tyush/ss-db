@@ -51,4 +51,4 @@ pub async fn main() -> std::io::Result<()> {
 
 pub mod foreign_traits;
 pub(crate) mod paths;
-pub(crate) mod app;
+pub(crate) mod app;pub(crate) mod app;
