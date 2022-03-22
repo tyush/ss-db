@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="container-md" >
-    <form action="{% block action %}{% endblock action %}" method="post">
+    <form action="{% block action %}{% endblock action %}" enctype="multipart/form-data" method="post">
         {% block questions %}
         {% endblock questions %}
     </form>

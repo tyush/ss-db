@@ -38,7 +38,8 @@ async fn index(
 pub fn add_paths(
     conf: &mut ServiceConfig
 ) {
-    conf.service(index)
+    conf.app_data(web::FormConfig::default().limit(16384 * 4))
+        .service(index)
         .route("/form/2022/pit",  web::to(forms2022::pit))
         .service(forms2022::pit_submit);
         

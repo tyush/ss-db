@@ -54,6 +54,7 @@ struct PitForm {
     pub size_z: f32,
     pub auto_shoot_upper: Option<()>,
     pub auto_shoot_lower: Option<()>,
+    pub auto_shots: i32,
     pub teleop_shoot_upper: Option<()>,
     pub teleop_shoot_lower: Option<()>,
     pub bar: Bar,
@@ -73,7 +74,7 @@ async fn pit_submit(
     debug!("Got form data from {:?}: {:?}", req.connection_info().peer_addr(), form.0);
 
     let entry = pit_responses_2022::ActiveModel {
-        author: Set(session.get("uuid")?.unwrap_or(0)),
+        author: Set(session.get("uuid")?.unwrap_or(-1)),
         timestamp: Set(SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs().try_into().unwrap()),
         team: Set(form.0.team_number.try_into().unwrap()),
         name: Set(Some(form.0.team_name)),
@@ -92,7 +93,7 @@ async fn pit_submit(
             }
             x
          }),
-        auto_shots: Set(0), // todo: add to form
+        auto_shots: Set(form.0.auto_shots), // todo: add to form
         auto_taxi: Set(0), // todo: add to form
         teleop_where_shoot: Set({ 
             let mut x = 0; // ripoff bitflag
@@ -109,7 +110,7 @@ async fn pit_submit(
     };
 
     if let Err(e) = entry.insert(&data.conn).await {
-        FlashMessage::error(format!("Unable to submit pit data for team {}: {:?}", form.0.team_number, e));
+        FlashMessage::error(format!("Unable to submit pit data for team {}: {:?}", form.0.team_number, e)).send();
     } else {
         FlashMessage::success(format!("Successfully submitted pit data for team {}", form.0.team_number)).send();
     };

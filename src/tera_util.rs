@@ -10,15 +10,15 @@ pub struct Alert {
 
 impl From<&FlashMessage> for Alert {
     fn from(rhs: &FlashMessage) -> Self {
-        Self {
-            variant: match rhs.level() {
+        Self::new(
+            match rhs.level() {
                 actix_web_flash_messages::Level::Debug | actix_web_flash_messages::Level::Info => AlertType::Info,
                 actix_web_flash_messages::Level::Success => AlertType::Success,
                 actix_web_flash_messages::Level::Warning => AlertType::Warning,
                 actix_web_flash_messages::Level::Error => AlertType::Danger
             },
-            text: rhs.content().to_owned(),
-        }
+            rhs.content().to_owned(),
+        )
     }
 }
 

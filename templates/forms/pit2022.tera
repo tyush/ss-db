@@ -3,7 +3,7 @@
 {% block title %}Pit Scouting Form{% endblock title %}
 {% block action %}/form/2022/pit/submit{% endblock action %}
 {% block questions %}
-{{ macros::q(id="team_number", label="Team Number", placeholder="5411") }}
+{{ macros::q(id="team_number", label="Team Number", placeholder="5411", type="number") }}
 {{ macros::q(id="team_name", label="Team Name", placeholder="Robotalons") }}
 
 <div class="row justify-content-center">
@@ -84,6 +84,8 @@
 </div>
 <div class="my-3" />
 
+{{ macros::q(id="auto_shots", label="How many shots is their auton?", placeholder="3", type="number") }}
+
 <div class="row justify-content-center">
     <div class="col">
         Can shoot: teleop?
@@ -101,8 +103,9 @@
 </div>
 <div class="my-3" />
 
-<div class="row justify-content-center">
-    <div class="col">
+{# Image code. Replace if we plan for images to be used too.
+    <div class="row justify-content-center">
+        <div class="col">
         Image
     </div>
     <div class="col justify-content-center">
@@ -112,6 +115,7 @@
     </div>
 </div>
 <div class="my-3" />
+#}
 
 <div class="row justify-content-center">
     <div class="col">
@@ -126,6 +130,4 @@
 <div class="row">
     <input type="submit" class="form-control btn btn-lg btn-primary" />
 </div>
-
-
 {% endblock questions %}
