@@ -40,9 +40,9 @@ pub fn add_paths(
 ) {
     conf.app_data(web::FormConfig::default().limit(16384 * 4))
         .service(index)
-        .route("/form/2022/pit",  web::to(forms2022::pit))
-        .service(forms2022::pit_submit);
-        
+        .route("/form/2022/pit",  web::to(forms2022::pit)) // workaround for being unable to define a GET and POST route for the same path
+        .service(forms2022::pit_submit)
+        .route("/form/2022/match", web::to(forms2022::game));
 }
 
 

@@ -1,0 +1,18 @@
+{% extends "forms/form.tera" %}
+{% import "forms/form_macros.tera" as macros %}
+{% block title %}Match Scouting Form{% endblock title %}
+{% block action %}/form/2022/match/submit{% endblock action %}
+{% block questions %}
+{{ macros::q(id="team_number", label="Team Number", placeholder="5411", type="number") }}
+
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="{{ id }}" class="form-label">{{ label }}</label>
+    </div>
+    <div class="col">
+        <input type="text" name="{{ id }}" class="form-control" id="{{ id }}" autocomplete="off" required placeholder="{{ placeholder }}">
+    </div>
+</div>
+<div class="my-3" />
+
+{% endblock questions %}

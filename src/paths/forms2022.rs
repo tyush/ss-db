@@ -16,11 +16,6 @@ use crate::{app::AppState, paths::WebResult};
 use crate::foreign_traits::ErrToActix;
 
 
-#[derive(Debug, Serialize)]
-struct TemplatePit2022 {
-    username: String,
-    pass_hash: String,
-}
 
 pub(crate) async fn pit(
     req: HttpRequest,
@@ -59,7 +54,7 @@ struct PitForm {
     pub teleop_shoot_lower: Option<()>,
     pub bar: Bar,
     pub comments: Option<String>,
-    pub img: String
+    pub img: Option<String>
 }
 
 #[post("/form/2022/pit/submit")]
@@ -86,10 +81,10 @@ async fn pit_submit(
         auto_where_shoot: Set({ 
             let mut x = 0; // ripoff bitflag
             if form.0.auto_shoot_lower.is_some() {
-                x += 1;
+                x += 0b01;
             }
             if form.0.auto_shoot_upper.is_some() {
-                x += 2;
+                x += 0b10;
             }
             x
          }),
@@ -98,15 +93,15 @@ async fn pit_submit(
         teleop_where_shoot: Set({ 
             let mut x = 0; // ripoff bitflag
             if form.0.teleop_shoot_lower.is_some() {
-                x += 1;
+                x += 0b01;
             }
             if form.0.teleop_shoot_upper.is_some() {
-                x += 2;
+                x += 0b10;
             }
             x
          }),
         image: Set(None),
-        ..Default::default()
+        ..Default::default() // autogenerate an id 
     };
 
     if let Err(e) = entry.insert(&data.conn).await {
@@ -120,4 +115,25 @@ async fn pit_submit(
         .insert_header((header::LOCATION, "/form/2022/pit"))
         .finish()
     )
+}
+
+pub(crate) async fn game(
+    req: HttpRequest,
+    data: web::Data<AppState>,
+    messages: IncomingFlashMessages,
+    session: Session
+) -> WebResult {
+    let template = &data.templates;
+    
+    let mut context = tera::Context::new();
+
+    context.insert("random_comment", crate::paths::get_random_comment());
+
+    let flashes: Vec<Alert> = messages.iter().map(Alert::from).collect();
+
+    debug!("flash messages for user at {:?}: {:?}", req.connection_info().peer_addr(), flashes);
+
+    context.insert("messages", &flashes);
+
+    Ok(HttpResponse::Ok().content_type("text/html").body(template.render("forms/match2022.tera", &context)?))
 }
