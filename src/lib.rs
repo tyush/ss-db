@@ -16,6 +16,7 @@ pub async fn main() -> std::io::Result<()> {
     use crate::app::AppState;
     use actix_web::{ App, HttpServer, web::Data };
     use actix_files::Files;
+    use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
     dotenv::dotenv().ok();
     let db_url = std::env::var("DATABASE_URL").expect("DATABASE_URL is not set");
@@ -27,6 +28,13 @@ pub async fn main() -> std::io::Result<()> {
     // Migrator::up(&conn, None).await.unwrap();
     let templates = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*")).unwrap();
     let state = AppState { templates, conn };
+
+    let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
+    builder
+        .set_private_key_file("../key.pem", SslFiletype::PEM)
+        .unwrap();
+    builder.set_certificate_chain_file("../cert.pem").unwrap();
+
 
     env_logger::init_from_env(env_logger::Env::new().default_filter_or("debug"));
 
@@ -46,7 +54,7 @@ pub async fn main() -> std::io::Result<()> {
             .service(Files::new("/static", "./static")) // needs actix_files
     });
 
-    let server = server.bind(&server_url)?;
+    let server = server.bind_openssl(&server_url, builder)?;
     println!("Hosting on {}", server_url);
 
     server.run().await?;
