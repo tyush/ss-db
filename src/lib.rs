@@ -20,7 +20,7 @@ pub async fn main() -> std::io::Result<()> {
     dotenv::dotenv().ok();
     let db_url = std::env::var("DATABASE_URL").expect("DATABASE_URL is not set");
     let host = std::env::var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string());
-    let port = std::env::var("PORT").unwrap_or_else(|_| "8080".to_string());
+    let port = std::env::var("PORT").unwrap_or_else(|_| "80".to_string());
     let server_url = format!("{}:{}", host, port);
 
     let conn = sea_orm::Database::connect(&db_url).await.unwrap();
