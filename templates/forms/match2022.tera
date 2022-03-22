@@ -3,9 +3,34 @@
 {% block title %}Match Scouting Form{% endblock title %}
 {% block action %}/form/2022/match/submit{% endblock action %}
 {% block questions %}
-{{ macros::q(id="team_number", label="Team Number", placeholder="5411", type="number") }}
 
 <div class="row justify-content-center">
+    <div class="col justify-content-center">
+        <h3>
+            Pre-Match
+        </h3>
+    </div>
+</div>
+
+{{ macros::q(id="team_number", label="Team Number", placeholder="5411", type="number") }}
+
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+    <label class="btn btn-secondary active">
+      <input type="radio" name="match_type" value="0" autocomplete="off" checked>Playoffs
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="match_type" value="1" autocomplete="off">Qualifiers
+    </label>
+    <label class="btn btn-secondary">
+      <input type="radio" name="match_type" value="2" autocomplete="off">Finals
+    </label>
+  </div>
+
+{{ macros::q(id="match_number", label="Match Number", placeholder="22", type="number") }}
+
+
+
+{# <div class="row justify-content-center">
     <div class="col">
         <label for="{{ id }}" class="form-label">{{ label }}</label>
     </div>
@@ -13,6 +38,202 @@
         <input type="text" name="{{ id }}" class="form-control" id="{{ id }}" autocomplete="off" required placeholder="{{ placeholder }}">
     </div>
 </div>
+<div class="my-3" /> #}
+
+<div class="row justify-content-center">
+    <div class="col justify-content-center">
+        <h3>
+            Auton
+        </h3>
+    </div>
+</div>
+
+{{ macros::toggleq(id="auton_did_preload", label="Did preload?") }}
+
+{{ macros::toggleq(id="auton_did_hp_shoot", label="Did human player throw shot?") }}
+
+{{ macros::toggleq(id="auton_did_hp_sink", label="Did human player sink shot?") }}
+
+{{ macros::toggleq(id="auton_did_taxi", label="Did taxi?") }}
+
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="auton_shots" class="form-label">Balls shot</label>
+    </div>
+    <div class="col">
+        <div class="d-flex p-2 m-0">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" onClick="document.getElementById('auton_shots').value = Math.max(parseInt(document.getElementById('auton_shots').value) - 1, 0);" class="btn btn-danger form-control-lg p-0" style="width: 2rem">-1</button>
+                </div>
+                <input type="number" name="auton_shots" id="auton_shots" class="form-control number-input" value="0" style="width: 3rem" />
+                <div class="input-group-append">
+                    <button type="button" onClick="document.getElementById('auton_shots').value = Math.max(parseInt(document.getElementById('auton_shots').value) + 1, 0);" class="btn btn-primary form-control-lg p-0" style="width: 3rem">+1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="auton_upper_sunk" class="form-label">Balls sunk upper</label>
+    </div>
+    <div class="col">
+        <div class="d-flex p-2 m-0">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" onClick="document.getElementById('auton_upper_sunk').value = Math.max(parseInt(document.getElementById('auton_upper_sunk').value) - 1, 0); document.getElementById('auton_shots').value = Math.max(parseInt(document.getElementById('auton_shots').value) - 1, 0);" class="btn btn-danger form-control-lg p-0" style="width: 2rem">-1</button>
+                </div>
+                <input type="number" name="auton_upper_sunk" id="auton_upper_sunk" class="form-control number-input" value="0" style="width: 3rem" />
+                <div class="input-group-append">
+                    <button type="button" onClick="document.getElementById('auton_upper_sunk').value = Math.max(parseInt(document.getElementById('auton_upper_sunk').value) + 1, 0); document.getElementById('auton_shots').value = Math.max(parseInt(document.getElementById('auton_shots').value) + 1, 0);" class="btn btn-primary form-control-lg p-0" style="width: 3rem">+1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="auton_upper_sunk" class="form-label">Balls sunk lower</label>
+    </div>
+    <div class="col">
+        <div class="d-flex p-2 m-0">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" onClick="document.getElementById('auton_lower_sunk').value = Math.max(parseInt(document.getElementById('auton_lower_sunk').value) - 1, 0); document.getElementById('auton_shots').value = Math.max(parseInt(document.getElementById('auton_shots').value) - 1, 0);" class="btn btn-danger form-control-lg p-0" style="width: 2rem">-1</button>
+                </div>
+                <input type="number" name="auton_lower_sunk" id="auton_lower_sunk" class="form-control number-input" value="0" style="width: 3rem" />
+                <div class="input-group-append">
+                    <button type="button" onClick="document.getElementById('auton_lower_sunk').value = Math.max(parseInt(document.getElementById('auton_lower_sunk').value) + 1, 0); document.getElementById('auton_shots').value = Math.max(parseInt(document.getElementById('auton_shots').value) + 1, 0);" class="btn btn-primary form-control-lg p-0" style="width: 3rem">+1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col justify-content-center">
+        <h3>
+            Teleop
+        </h3>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="teleop_shots" class="form-label">Balls shot</label>
+    </div>
+    <div class="col">
+        <div class="d-flex p-2 m-0">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" onClick="document.getElementById('teleop_shots').value = Math.max(parseInt(document.getElementById('teleop_shots').value) - 1, 0);" class="btn btn-danger form-control-lg p-0" style="width: 2rem">-1</button>
+                </div>
+                <input type="number" name="teleop_shots" id="teleop_shots" class="form-control number-input" value="0" style="width: 3rem" />
+                <div class="input-group-append">
+                    <button type="button" onClick="document.getElementById('teleop_shots').value = Math.max(parseInt(document.getElementById('teleop_shots').value) + 1, 0);" class="btn btn-primary form-control-lg p-0" style="width: 3rem">+1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="teleop_upper_sunk" class="form-label">Balls sunk upper</label>
+    </div>
+    <div class="col">
+        <div class="d-flex p-2 m-0">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" onClick="document.getElementById('teleop_upper_sunk').value = Math.max(parseInt(document.getElementById('teleop_upper_sunk').value) - 1, 0); document.getElementById('teleop_shots').value = Math.max(parseInt(document.getElementById('teleop_shots').value) - 1, 0);" class="btn btn-danger form-control-lg p-0" style="width: 2rem">-1</button>
+                </div>
+                <input type="number" name="teleop_upper_sunk" id="teleop_upper_sunk" class="form-control number-input" value="0" style="width: 3rem" />
+                <div class="input-group-append">
+                    <button type="button" onClick="document.getElementById('teleop_upper_sunk').value = Math.max(parseInt(document.getElementById('teleop_upper_sunk').value) + 1, 0); document.getElementById('teleop_shots').value = Math.max(parseInt(document.getElementById('teleop_shots').value) + 1, 0);" class="btn btn-primary form-control-lg p-0" style="width: 3rem">+1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="teleop_upper_sunk" class="form-label">Balls sunk lower</label>
+    </div>
+    <div class="col">
+        <div class="d-flex p-2 m-0">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" onClick="document.getElementById('teleop_lower_sunk').value = Math.max(parseInt(document.getElementById('teleop_lower_sunk').value) - 1, 0); document.getElementById('teleop_shots').value = Math.max(parseInt(document.getElementById('teleop_shots').value) - 1, 0);" class="btn btn-danger form-control-lg p-0" style="width: 2rem">-1</button>
+                </div>
+                <input type="number" id="teleop_lower_sunk" name="teleop_lower_sunk" class="form-control number-input" value="0" style="width: 3rem" />
+                <div class="input-group-append">
+                    <button type="button" onClick="document.getElementById('teleop_lower_sunk').value = Math.max(parseInt(document.getElementById('teleop_lower_sunk').value) + 1, 0); document.getElementById('teleop_shots').value = Math.max(parseInt(document.getElementById('teleop_shots').value) + 1, 0);" class="btn btn-primary form-control-lg p-0" style="width: 3rem">+1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+{{ macros::stepperq(id="pinned", label="Times pinned") }}
+
+{{ macros::stepperq(id="did_pin", label="Pinned other bot") }}
+
+<div class="row justify-content-center">
+    <div class="col justify-content-center">
+        <h3>
+            Endgame
+        </h3>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col">
+        What bar did they reach? 
+        <small class="text-muted">(even if fell)</small>
+    </div>
+    <div class="col">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">reached</span>
+            </div>
+            <select class="form-control" name="bar">
+                <option selected value="none">None</option>
+                <option value="low">Low</option>
+                <option value="middle">Middle</option>
+                <option value="high">High</option>
+                <option value="traversal">Traversal</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+
+{{ macros::toggleq(id="fell", label="Did they fall?") }}
+
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="comments" class="form-label">Comments</label>
+    </div>
+    <div class="col">
+        <input type="text" name="comments" class="form-control" id="comments" autocomplete="off" placeholder="{{ random_comment }}">
+    </div>
+</div>
+<div class="my-3" />
+
+<div class="my-4" />
+
+<div class="row">
+    <input type="submit" class="form-control btn btn-lg btn-primary" />
+</div>
 
 {% endblock questions %}

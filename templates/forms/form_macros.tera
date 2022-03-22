@@ -21,3 +21,58 @@
 </div>
 <div class="my-3" />
 {% endmacro cq %}
+
+{% macro stepper(id, initial=0) %}
+<div class="d-flex p-2 m-0">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button type="button" onClick="document.getElementById('{{ id }}').value = Math.max(parseInt(document.getElementById('{{ id }}').value) - 1, 0);" class="btn btn-danger form-control-lg p-0" style="width: 2rem">-1</button>
+            <button type="button" onClick="document.getElementById('{{ id }}').value = Math.max(parseInt(document.getElementById('{{ id }}').value) + 1, 0);" class="btn btn-primary form-control-lg p-0" style="width: 3rem">+1</button>
+        </div>
+        <input type="number" id="{{ id }}" class="form-control number-input" value="{{ initial }}" style="width: 3rem" />
+    </div>
+</div>
+{% endmacro stepper %}
+
+{% macro stepperq(id, label, initial=0) %}
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="{{ id }}" class="form-label">{{ label }}</label>
+    </div>
+    <div class="col">
+        <div class="d-flex p-2 m-0">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" onClick="document.getElementById('{{ id }}').value = Math.max(parseInt(document.getElementById('{{ id }}').value) - 1, 0);" class="btn btn-danger form-control-lg p-0" style="width: 2rem">-1</button>
+                </div>
+                <input type="number" name="{{ id }}" id="{{ id }}" class="form-control number-input" value="{{ initial }}" style="width: 3rem" />
+                <div class="input-group-append">
+                    <button type="button" onClick="document.getElementById('{{ id }}').value = Math.max(parseInt(document.getElementById('{{ id }}').value) + 1, 0);" class="btn btn-primary form-control-lg p-0" style="width: 3rem">+1</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+{% endmacro stepper %}
+
+{% macro toggleq(id, label) %}
+<div class="row justify-content-center">
+    <div class="col">
+        <label for="{{ id }}" class="form-label">{{ label }}</label>
+    </div>
+    <div class="col">
+        <div class="d-flex p-2 m-0">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="{{ id }}" id="{{ id }}-did" autocomplete="off" checked value="false">didn't
+                </label>
+                <label class="btn btn-secondary">
+                  <input type="radio" name="{{ id }}" id="{{ id }}-didnot" autocomplete="off" value="true">did!
+                </label>
+              </div>
+        </div>
+    </div>
+</div>
+<div class="my-3" />
+{% endmacro stepper %}

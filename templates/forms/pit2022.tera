@@ -27,7 +27,7 @@
     <div class="col">
         Dimensions
     </div>
-    <div class="col">
+    <div class="col-8">
         <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">x</span>

@@ -15,6 +15,8 @@ pub struct Model {
     pub team_number: i32,
     pub preload: i32,
     pub pick_from_field: i32,
+    pub hp_shot: i32,
+    pub hp_sink: i32,
     pub taxi: i32,
     pub auto_shots: i32,
     pub auto_upper_hub: i32,
