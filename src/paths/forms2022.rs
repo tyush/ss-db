@@ -180,7 +180,7 @@ async fn match_submit(
         preload: Set(form.0.auton_did_preload as i32),
         pick_from_field: Set(0),
         hp_shot: Set(form.0.auton_did_hp_sink as i32),
-        hp_sink: Set(form.0.auton_did_hp_sink as i32),
+        hp_sink: Set(form.0.auton_did_hp_shoot as i32),
         taxi: Set(form.0.auton_did_taxi as i32),
         auto_shots: Set(form.0.auton_shots),
         auto_upper_hub: Set(form.0.auton_upper_sunk),
