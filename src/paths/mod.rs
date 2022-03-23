@@ -13,6 +13,7 @@ use crate::app::AppState;
 
 
 pub mod forms2022;
+pub mod api;
 
 
 #[derive(serde::Serialize)]
@@ -43,6 +44,8 @@ pub fn add_paths(
         .route("/form/2022/pit",  web::to(forms2022::pit)) // workaround for being unable to define a GET and POST route for the same path
         .service(forms2022::pit_submit)
         .route("/form/2022/match", web::to(forms2022::game));
+
+    api::add_paths(conf);
 }
 
 
