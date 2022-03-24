@@ -67,7 +67,6 @@ async fn get_all_match(
     use entities::match_responses_2022 as match_resp;
 
     let responses: Vec<match_resp::Model> = match_resp::Entity::find()
-        .filter(match_resp::Column::TeamNumber.eq(path.0))
         .all(&data.conn)
         .await?;
 
