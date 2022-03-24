@@ -10,7 +10,9 @@ pub fn add_paths(
     conf: &mut ServiceConfig
 ) {
     conf.service(get_all_by_team_pit)
-        .service(get_all_by_team_match);
+        .service(get_all_by_team_match)
+        .service(get_all_pit)
+        .service(get_all_match);
 }
 
 #[get("/api/2022/all/pit/{team}")]
@@ -72,4 +74,3 @@ async fn get_all_match(
 
     Ok(HttpResponse::Ok().json(responses))
 }
-
