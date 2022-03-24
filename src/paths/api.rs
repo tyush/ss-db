@@ -9,7 +9,8 @@ use super::WebResult;
 pub fn add_paths(
     conf: &mut ServiceConfig
 ) {
-    conf.service(get_all_by_team_pit);
+    conf.service(get_all_by_team_pit)
+        .service(get_all_by_team_match);
 }
 
 #[get("/api/2022/all/pit/{team}")]
