@@ -52,7 +52,7 @@ struct PitForm {
     pub auto_shots: i32,
     pub teleop_shoot_upper: Option<()>,
     pub teleop_shoot_lower: Option<()>,
-    pub bar: Bar,
+    pub bar: i32,
     pub comments: Option<String>,
     pub img: Option<String>
 }
@@ -77,7 +77,7 @@ async fn pit_submit(
         size_x: Set(form.0.size_x.floor() as i32),
         size_y: Set(form.0.size_y.floor() as i32),
         size_z: Set(form.0.size_z.floor() as i32),
-        climb: Set(form.0.bar.into()),
+        climb: Set(form.0.bar),
         auto_where_shoot: Set({ 
             let mut x = 0; // ripoff bitflag
             if form.0.auto_shoot_lower.is_some() {
@@ -155,7 +155,7 @@ struct MatchForm {
     pub teleop_lower_sunk: i32,
     pub pinned: i32,
     pub did_pin: i32,
-    pub bar: Bar,
+    pub bar: i32,
     pub fell: bool,
     pub comments: String
 }
@@ -190,7 +190,7 @@ async fn match_submit(
         teleop_lower_hub: Set(form.0.teleop_lower_sunk),
         got_pinned: Set(form.0.pinned),
         did_pin: Set(form.0.did_pin),
-        climb: Set(form.0.bar.into()),
+        climb: Set(form.0.bar),
         did_fall: Set(form.0.fell as i32),
         red_score: Set(0),
         blue_score: Set(0),
