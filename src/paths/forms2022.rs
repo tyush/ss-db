@@ -199,9 +199,9 @@ async fn match_submit(
     };
 
     if let Err(e) = entry.insert(&data.conn).await {
-        FlashMessage::error(format!("Unable to submit pit data for team {}: {:?}", form.0.team_number, e)).send();
+        FlashMessage::error(format!("Unable to submit game data for team {}: {:?}", form.0.team_number, e)).send();
     } else {
-        FlashMessage::success(format!("Successfully submitted pit data for team {}", form.0.team_number)).send();
+        FlashMessage::success(format!("Successfully submitted game data for team {} in match {}", form.0.team_number, form.0.number)).send();
     };
 
     Ok(
