@@ -56,11 +56,11 @@
               <span class="input-group-text">reaches</span>
             </div>
             <select class="form-control" name="bar">
-                <option selected value="none">None</option>
-                <option value="low">Low</option>
-                <option value="middle">Middle</option>
-                <option value="high">High</option>
-                <option value="traversal">Traversal</option>
+                <option selected value="0">None</option>
+                <option value="1">Low</option>
+                <option value="2">Middle</option>
+                <option value="3">High</option>
+                <option value="4">Traversal</option>
             </select>
         </div>
     </div>
