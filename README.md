@@ -1,3 +1,7 @@
+## archived
+SS-DB was hastily made to be ready before the 2021-2022 FRC season.
+With newfound time, a rewrite is to be made.
+
 # ss-db
 
 SS-DB is a singlularized rewrite of the previous SuperScout platform. 
